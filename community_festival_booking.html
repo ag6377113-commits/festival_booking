@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Community Festival & Cultural Puja</title>
+
+<style>
+
+/* =========================
+   BASIC RESET
+========================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f7fb;
+    color:#20152f;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:25px;
+}
+
+
+.hero{
+    position:relative;
+    overflow:hidden;
+    border-radius:28px;
+    padding:45px;
+    color:white;
+    background:linear-gradient(
+        135deg,
+        #32135f,
+        #6d28d9 52%,
+        #db2777
+    );
+}
+
+.hero h1{
+    font-size:44px;
+    line-height:1.05;
+    margin:10px 0 15px;
+}
+
+.hero p{
+    max-width:650px;
+    line-height:1.6;
+    opacity:.9;
+}
+
+.eyebrow{
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    opacity:.8;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+.hero-btn{
+    border:none;
+    padding:13px 20px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+    background:white;
+    color:#4b208b;
+}
+
+.hero-btn.secondary{
+    background:#ffffff20;
+    color:white;
+    border:1px solid #ffffff50;
+}
+
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:18px 0;
+}
+
+.stat{
+    background:white;
+    border:1px solid #eadff0;
+    border-radius:16px;
+    padding:18px;
+}
+
+.stat b{
+    font-size:26px;
+}
+
+.stat small{
+    display:block;
+    color:#756b84;
+    margin-top:5px;
+}
+
+
+/* =========================
+   GENERAL CARD
+========================= */
+
+.card{
+    background:white;
+    border:1px solid #eadff0;
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:18px;
+}
+
+.card h2{
+    margin-bottom:14px;
+}
+
+
+/* =========================
+   FESTIVAL CARDS
+========================= */
+
+.festival-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.festival{
+    background:white;
+    border:2px solid #eadff0;
+    border-radius:15px;
+    padding:17px;
+    text-align:left;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.festival:hover{
+    transform:translateY(-3px);
+}
+
+.festival.active{
+    border-color:#6d28d9;
+    background:#f5efff;
+}
+
+.festival-icon{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.festival strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.festival span{
+    font-size:12px;
+    color:#756b84;
+}
+
+
+/* =========================
+   BOOKING
+========================= */
+
+.booking-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.field{
+    margin-bottom:14px;
+}
+
+.field label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+input,
+select{
+    width:100%;
+    height:46px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:0 12px;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:#6d28d9;
+}
+
+
+/* =========================
+   TIME SLOTS
+========================= */
+
+.slots{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.slot{
+    height:50px;
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:11px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.slot:hover{
+    border-color:#db2777;
+}
+
+.slot.selected{
+    background:#fff0f7;
+    border:2px solid #db2777;
+    color:#9d174d;
+}
+
+.slot.peak{
+    border-color:#f5c2d7;
+}
+
+
+/* =========================
+   CAPACITY
+========================= */
+
+.capacity{
+    background:#faf7fc;
+    border-radius:12px;
+    padding:12px;
+    margin-top:12px;
+    color:#756b84;
+    font-size:13px;
+}
+
+.meter{
+    height:8px;
+    background:#eee5f2;
+    border-radius:10px;
+    margin-top:8px;
+    overflow:hidden;
+}
+
+.meter-bar{
+    height:100%;
+    width:55%;
+    border-radius:10px;
+    background:linear-gradient(
+        90deg,
+        #7c3aed,
+        #db2777
+    );
+    transition:.3s;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:16px;
+}
+
+.primary,
+.secondary-btn{
+    border:none;
+    padding:14px 20px;
+    border-radius:11px;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.primary{
+    color:white;
+    background:linear-gradient(
+        135deg,
+        #6d28d9,
+        #db2777
+    );
+}
+
+.secondary-btn{
+    background:#24152f;
+    color:white;
+}
+
+
+/* =========================
+   RESULT MESSAGE
+========================= */
+
+.result{
+    display:none;
+    margin-top:13px;
+    padding:13px;
+    border-radius:10px;
+    font-size:13px;
+}
+
+.success{
+    background:#ecfdf3;
+    color:#166534;
+}
+
+.error{
+    background:#fff1f2;
+    color:#9f1239;
+}
+
+
+/* =========================
+   PROGRAM
+========================= */
+
+.program{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.event{
+    display:flex;
+    gap:15px;
+    padding:15px;
+    border:1px solid #eadff0;
+    border-radius:13px;
+}
+
+.event-time{
+    color:#7c3aed;
+    font-weight:bold;
+    min-width:70px;
+}
+
+.event-name{
+    font-weight:bold;
+}
+
+.event-type{
+    color:#756b84;
+    font-size:12px;
+    margin-top:4px;
+}
+
+
+/* =========================
+   FOOD
+========================= */
+
+.food{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.food-card{
+    border:1px solid #eadff0;
+    border-radius:14px;
+    padding:16px;
+    background:#fff;
+}
+
+.food-icon{
+    font-size:27px;
+}
+
+.food-card strong{
+    display:block;
+    margin-top:8px;
+}
+
+.food-card span{
+    color:#756b84;
+    font-size:12px;
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.summary-box{
+    background:white;
+    border:1px solid #eadff0;
+    border-radius:11px;
+    padding:12px;
+}
+
+.summary-box small{
+    display:block;
+    color:#756b84;
+    font-size:11px;
+}
+
+.summary-box b{
+    font-size:13px;
+}
+
+
+/* =========================
+   RECEIPT
+========================= */
+
+.receipt{
+    display:none;
+    margin-top:20px;
+    border:2px dashed #555;
+    padding:25px;
+    border-radius:15px;
+    background:white;
+}
+
+.receipt h2{
+    text-align:center;
+    margin-bottom:5px;
+}
+
+.receipt-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:11px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.confirmed{
+    text-align:center;
+    margin-top:20px;
+    color:#166534;
+    font-weight:bold;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:750px){
+
+    .festival-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .booking-grid{
+        grid-template-columns:1fr;
+    }
+
+    .program{
+        grid-template-columns:1fr;
+    }
+
+    .food{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .summary{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+}
+
+
+@media(max-width:450px){
+
+    .container{
+        padding:12px;
+    }
+
+    .hero{
+        padding:27px 20px;
+    }
+
+    .hero h1{
+        font-size:29px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .festival-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .food{
+        grid-template-columns:1fr;
+    }
+
+    .slots{
+        grid-template-columns:1fr;
+    }
+
+    .summary{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+
+/* =====================================================
+   IMPORTANT PRINT CSS
+   THIS FIXES BLANK PDF PROBLEM
+===================================================== */
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:15mm;
+    }
+
+    html,
+    body{
+        width:100%;
+        height:auto;
+        background:white !important;
+        color:#000 !important;
+    }
+
+    /*
+       Hide all direct sections inside container
+       except printArea.
+    */
+
+    .container > .hero,
+    .container > .stats,
+    .container > #booking,
+    .container > #programSection,
+    .container > .card:not(#printArea){
+        display:none !important;
+    }
+
+    .container{
+        display:block !important;
+        width:100% !important;
+        max-width:none !important;
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    #printArea{
+        display:block !important;
+        visibility:visible !important;
+
+        width:100% !important;
+        margin:0 !important;
+        padding:10px !important;
+
+        background:white !important;
+        border:none !important;
+        box-shadow:none !important;
+    }
+
+    #printArea h2{
+        display:block !important;
+        visibility:visible !important;
+        color:#000 !important;
+    }
+
+    .summary{
+        display:grid !important;
+        grid-template-columns:repeat(2,1fr) !important;
+        gap:10px !important;
+    }
+
+    .summary-box{
+        display:block !important;
+        visibility:visible !important;
+        border:1px solid #999 !important;
+        background:white !important;
+        color:#000 !important;
+    }
+
+    .summary-box small{
+        display:block !important;
+        color:#555 !important;
+    }
+
+    .summary-box b{
+        color:#000 !important;
+    }
+
+    .receipt{
+        display:block !important;
+        visibility:visible !important;
+
+        margin-top:25px !important;
+        padding:25px !important;
+
+        border:2px dashed #555 !important;
+        border-radius:12px !important;
+
+        background:white !important;
+        color:#000 !important;
+    }
+
+    .receipt h2{
+        color:#000 !important;
+        text-align:center !important;
+    }
+
+    .receipt p{
+        color:#555 !important;
+    }
+
+    .receipt-row{
+        display:flex !important;
+        visibility:visible !important;
+
+        justify-content:space-between !important;
+        gap:15px !important;
+
+        padding:10px 0 !important;
+        border-bottom:1px solid #ccc !important;
+
+        color:#000 !important;
+    }
+
+    .receipt-row b,
+    .receipt-row span{
+        color:#000 !important;
+    }
+
+    .confirmed{
+        display:block !important;
+        visibility:visible !important;
+        color:#166534 !important;
+        text-align:center !important;
+        margin-top:20px !important;
+    }
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    text-align:center;
+    color:#756b84;
+    font-size:12px;
+    padding:15px;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+<div class="eyebrow">
+Community • Culture • Celebration
+</div>
+
+<h1>
+Celebrate Together.<br>
+Enter Smarter.
+</h1>
+
+<p>
+A digital crowd-management platform for community festivals
+with controlled entry slots, cultural programs and food
+stall discovery.
+</p>
+
+<div class="hero-buttons">
+
+<button
+class="hero-btn"
+id="startBtn">
+
+🎟️ Book My Slot
+
+</button>
+
+<button
+class="hero-btn secondary"
+id="programBtn">
+
+🎭 Explore Programs
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<section class="stats">
+
+<div class="stat">
+
+<b id="inside">
+247
+</b>
+
+<small>
+Visitors inside now
+</small>
+
+</div>
+
+
+<div class="stat">
+
+<b id="spaces">
+18
+</b>
+
+<small>
+Spaces available
+</small>
+
+</div>
+
+
+<div class="stat">
+
+<b id="wait">
+08 min
+</b>
+
+<small>
+Estimated entry wait
+</small>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FESTIVALS
+===================================================== -->
+
+<section class="card">
+
+<h2>
+🎉 Choose Your Celebration
+</h2>
+
+<div class="festival-grid">
+
+
+<button
+class="festival active"
+data-f="Diwali Mela">
+
+<div class="festival-icon">
+🪔
+</div>
+
+<strong>
+Diwali Mela
+</strong>
+
+<span>
+Lights • Puja • Music
+</span>
+
+</button>
+
+
+<button
+class="festival"
+data-f="Durga Puja">
+
+<div class="festival-icon">
+🙏
+</div>
+
+<strong>
+Durga Puja
+</strong>
+
+<span>
+Aarti • Dance • Bhog
+</span>
+
+</button>
+
+
+<button
+class="festival"
+data-f="Christmas Carnival">
+
+<div class="festival-icon">
+🎄
+</div>
+
+<strong>
+Christmas Carnival
+</strong>
+
+<span>
+Carol • Music • Fun
+</span>
+
+</button>
+
+
+<button
+class="festival"
+data-f="Eid Fair">
+
+<div class="festival-icon">
+🌙
+</div>
+
+<strong>
+Eid Fair
+</strong>
+
+<span>
+Prayer • Food • Culture
+</span>
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     BOOKING SECTION
+===================================================== -->
+
+<section class="card" id="booking">
+
+<h2>
+🎟️ Reserve Your Entry
+</h2>
+
+<div class="booking-grid">
+
+
+<div>
+
+
+<div class="field">
+
+<label>
+Full Name
+</label>
+
+<input
+id="name"
+type="text"
+placeholder="Enter your name">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Registration / Visitor ID
+</label>
+
+<input
+id="reg"
+type="text"
+placeholder="e.g. CF2026-1042">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Visit Date
+</label>
+
+<input
+id="date"
+type="date">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Number of Visitors
+</label>
+
+<select id="people">
+
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div>
+
+<label
+style="
+font-size:13px;
+font-weight:bold;
+display:block;
+margin-bottom:7px;
+">
+
+⏰ Available Time Slots
+
+</label>
+
+
+<div
+class="slots"
+id="slots">
+</div>
+
+
+<div class="capacity">
+
+<b id="capacityTitle">
+Moderate Crowd Expected
+</b>
+
+
+<div class="meter">
+
+<div
+class="meter-bar"
+id="meter">
+</div>
+
+</div>
+
+
+<p
+id="capacityText"
+style="margin-top:6px;">
+
+Select a slot for capacity details.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="primary"
+id="book">
+
+✓ Confirm Slot Booking
+
+</button>
+
+
+<button
+class="secondary-btn"
+id="print"
+style="display:none;">
+
+🖨️ Print Booking
+
+</button>
+
+</div>
+
+
+<div
+id="result"
+class="result">
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     PROGRAM SECTION
+===================================================== -->
+
+<section
+class="card"
+id="programSection">
+
+<h2>
+🎭 Cultural Program
+</h2>
+
+<p
+id="programCaption"
+style="
+color:#756b84;
+font-size:13px;
+margin-bottom:13px;
+">
+
+Diwali Mela Schedule
+
+</p>
+
+
+<div
+class="program"
+id="program">
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOD SECTION
+===================================================== -->
+
+<section class="card">
+
+<h2>
+🍴 Community Food Stalls
+</h2>
+
+<p
+style="
+color:#756b84;
+font-size:13px;
+margin-bottom:13px;
+">
+
+Discover food categories available at the festival.
+
+</p>
+
+
+<div
+class="food"
+id="food">
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     PRINT AREA
+===================================================== -->
+
+<section
+class="card"
+id="printArea">
+
+<h2>
+Booking Confirmation
+</h2>
+
+
+<div class="summary">
+
+
+<div class="summary-box">
+
+<small>
+Festival
+</small>
+
+<b id="sFestival">
+—
+</b>
+
+</div>
+
+
+<div class="summary-box">
+
+<small>
+Date
+</small>
+
+<b id="sDate">
+—
+</b>
+
+</div>
+
+
+<div class="summary-box">
+
+<small>
+Time
+</small>
+
+<b id="sSlot">
+—
+</b>
+
+</div>
+
+
+<div class="summary-box">
+
+<small>
+Visitors
+</small>
+
+<b id="sPeople">
+—
+</b>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     RECEIPT
+===================================================== -->
+
+<div
+class="receipt"
+id="receipt">
+
+<h2>
+COMMUNITY FESTIVAL
+</h2>
+
+
+<p
+style="
+text-align:center;
+color:#777;
+margin-bottom:15px;
+">
+
+Cultural Puja Celebration — Booking Receipt
+
+</p>
+
+
+<div class="receipt-row">
+
+<b>
+Confirmation ID
+</b>
+
+<span id="rCode">
+—
+</span>
+
+</div>
+
+
+<div class="receipt-row">
+
+<b>
+Visitor Name
+</b>
+
+<span id="rName">
+—
+</span>
+
+</div>
+
+
+<div class="receipt-row">
+
+<b>
+Registration ID
+</b>
+
+<span id="rReg">
+—
+</span>
+
+</div>
+
+
+<div class="receipt-row">
+
+<b>
+Festival
+</b>
+
+<span id="rFestival">
+—
+</span>
+
+</div>
+
+
+<div class="receipt-row">
+
+<b>
+Visit Date
+</b>
+
+<span id="rDate">
+—
+</span>
+
+</div>
+
+
+<div class="receipt-row">
+
+<b>
+Time Slot
+</b>
+
+<span id="rSlot">
+—
+</span>
+
+</div>
+
+
+<div class="receipt-row">
+
+<b>
+Visitors
+</b>
+
+<span id="rPeople">
+—
+</span>
+
+</div>
+
+
+<div class="confirmed">
+
+✓ SLOT BOOKING CONFIRMED
+
+</div>
+
+
+<p
+style="
+text-align:center;
+font-size:12px;
+color:#777;
+margin-top:10px;
+">
+
+Please arrive 10 minutes before your selected slot.
+
+</p>
+
+</div>
+
+</section>
+
+
+<div class="footer">
+
+Community Festival Digital Booking System © 2026
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   FESTIVAL DATA
+===================================================== */
+
+const festivalData = {
+
+
+"Diwali Mela":{
+
+events:[
+
+["05:00 PM","Lamp Lighting & Welcome","Opening"],
+
+["06:00 PM","Lakshmi Puja","Puja"],
+
+["07:00 PM","Classical Dance","Performance"],
+
+["08:00 PM","Cultural Music Night","Performance"],
+
+["09:00 PM","Community Celebration","Main Event"]
+
+],
+
+food:[
+
+["🍬","Sweets Corner","Jalebi, Gulab Jamun & Laddoo"],
+
+["🥘","North Indian","Chaat, Samosa & Paneer"],
+
+["🥞","South Indian","Dosa & Idli"],
+
+["☕","Beverages","Tea, Coffee & Fresh Drinks"]
+
+]
+
+},
+
+
+"Durga Puja":{
+
+events:[
+
+["04:30 PM","Pushpanjali","Puja"],
+
+["06:00 PM","Sandhya Aarti","Puja"],
+
+["07:00 PM","Traditional Dance","Performance"],
+
+["08:00 PM","Cultural Orchestra","Performance"],
+
+["09:00 PM","Community Gathering","Main Event"]
+
+],
+
+food:[
+
+["🍚","Bengali Specials","Khichuri & Bhog"],
+
+["🌯","Street Food","Rolls, Chaat & Snacks"],
+
+["🍰","Sweets","Rasgulla & Sandesh"],
+
+["☕","Drinks","Tea & Fresh Beverages"]
+
+]
+
+},
+
+
+"Christmas Carnival":{
+
+events:[
+
+["05:00 PM","Carol Singing","Performance"],
+
+["06:00 PM","Christmas Prayer","Prayer"],
+
+["07:00 PM","Children Performance","Performance"],
+
+["08:00 PM","Live Music","Performance"],
+
+["09:00 PM","Community Celebration","Main Event"]
+
+],
+
+food:[
+
+["🧁","Bakery","Cakes, Cookies & Pastries"],
+
+["🍟","Snacks","Sandwiches & Fries"],
+
+["🥘","Indian Food","Paneer & Biryani"],
+
+["☕","Beverages","Hot Chocolate & Coffee"]
+
+]
+
+},
+
+
+"Eid Fair":{
+
+events:[
+
+["05:00 PM","Community Welcome","Opening"],
+
+["06:00 PM","Eid Prayer Gathering","Prayer"],
+
+["07:00 PM","Cultural Performance","Performance"],
+
+["08:00 PM","Family Program","Family"],
+
+["09:00 PM","Community Dinner","Main Event"]
+
+],
+
+food:[
+
+["🍛","Biryani Stall","Veg & Non-Veg Biryani"],
+
+["🍢","Kebab Corner","Kebabs & Rolls"],
+
+["🍮","Desserts","Sheer Khurma & Sweets"],
+
+["🥛","Drinks","Lassi & Fresh Drinks"]
+
+]
+
+}
+
+};
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+const slots = [
+
+"04:00 PM – 05:00 PM",
+
+"05:00 PM – 06:00 PM",
+
+"06:00 PM – 07:00 PM",
+
+"07:00 PM – 08:00 PM",
+
+"08:00 PM – 09:00 PM",
+
+"09:00 PM – 10:00 PM"
+
+];
+
+
+let selectedFestival = "Diwali Mela";
+
+let selectedSlot = "";
+
+
+/* =====================================================
+   SHORTCUT
+===================================================== */
+
+const $ = id => document.getElementById(id);
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function render(){
+
+
+/* FESTIVAL */
+
+document
+.querySelectorAll(".festival")
+.forEach(button => {
+
+button.classList.toggle(
+"active",
+button.dataset.f === selectedFestival
+);
+
+});
+
+
+/* SLOTS */
+
+$("slots").innerHTML = "";
+
+
+slots.forEach((slot,index)=>{
+
+
+const button =
+document.createElement("button");
+
+
+button.type = "button";
+
+
+button.className =
+"slot" +
+(selectedSlot === slot ? " selected" : "") +
+(index >= 4 ? " peak" : "");
+
+
+button.textContent = slot;
+
+
+button.addEventListener(
+"click",
+()=>{
+
+selectedSlot = slot;
+
+render();
+
+}
+);
+
+
+$("slots").appendChild(button);
+
+});
+
+
+/* FESTIVAL DATA */
+
+const festival =
+festivalData[selectedFestival];
+
+
+/* PROGRAM */
+
+$("programCaption").textContent =
+selectedFestival + " Schedule";
+
+
+$("program").innerHTML =
+
+festival.events.map(event=>`
+
+<div class="event">
+
+<div class="event-time">
+${event[0]}
+</div>
+
+<div>
+
+<div class="event-name">
+${event[1]}
+</div>
+
+<div class="event-type">
+${event[2]}
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+
+/* FOOD */
+
+$("food").innerHTML =
+
+festival.food.map(item=>`
+
+<div class="food-card">
+
+<div class="food-icon">
+${item[0]}
+</div>
+
+<strong>
+${item[1]}
+</strong>
+
+<span>
+${item[2]}
+</span>
+
+</div>
+
+`).join("");
+
+
+/* CAPACITY */
+
+let index =
+selectedSlot
+? slots.indexOf(selectedSlot)
+: 0;
+
+
+let spaces =
+selectedSlot
+? Math.max(7,24-index*3)
+: 18;
+
+
+$("spaces").textContent =
+spaces;
+
+
+$("meter").style.width =
+(42 + index*9) + "%";
+
+
+if(selectedSlot){
+
+$("capacityTitle").textContent =
+index >= 4
+? "High-Demand Peak Slot"
+: "Moderate Crowd Expected";
+
+
+$("capacityText").textContent =
+spaces +
+" spaces currently shown as available.";
+
+}
+
+else{
+
+$("capacityTitle").textContent =
+"Moderate Crowd Expected";
+
+
+$("capacityText").textContent =
+"Select a slot for capacity details.";
+
+}
+
+
+/* SUMMARY */
+
+$("sFestival").textContent =
+selectedFestival;
+
+
+$("sDate").textContent =
+$("date").value || "—";
+
+
+$("sSlot").textContent =
+selectedSlot || "—";
+
+
+$("sPeople").textContent =
+$("people").value;
+
+}
+
+
+/* =====================================================
+   FESTIVAL SELECTION
+===================================================== */
+
+document
+.querySelectorAll(".festival")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+()=>{
+
+selectedFestival =
+button.dataset.f;
+
+selectedSlot = "";
+
+render();
+
+}
+);
+
+});
+
+
+/* =====================================================
+   DATE / PEOPLE
+===================================================== */
+
+$("date").addEventListener(
+"change",
+render
+);
+
+
+$("people").addEventListener(
+"change",
+render
+);
+
+
+/* =====================================================
+   BOOK BUTTON
+===================================================== */
+
+$("book").addEventListener(
+"click",
+()=>{
+
+
+const name =
+$("name").value.trim();
+
+
+const reg =
+$("reg").value.trim();
+
+
+const date =
+$("date").value;
+
+
+const people =
+$("people").value;
+
+
+const result =
+$("result");
+
+
+/* VALIDATION */
+
+if(
+!name ||
+!reg ||
+!date ||
+!selectedSlot
+){
+
+result.className =
+"result error";
+
+
+result.style.display =
+"block";
+
+
+result.textContent =
+"⚠️ Please complete all details and select a time slot.";
+
+
+return;
+
+}
+
+
+/* CONFIRMATION ID */
+
+const code =
+"CF-" +
+Math.random()
+.toString(36)
+.substring(2,8)
+.toUpperCase();
+
+
+/* RECEIPT DATA */
+
+$("rCode").textContent =
+code;
+
+
+$("rName").textContent =
+name;
+
+
+$("rReg").textContent =
+reg;
+
+
+$("rFestival").textContent =
+selectedFestival;
+
+
+$("rDate").textContent =
+date;
+
+
+$("rSlot").textContent =
+selectedSlot;
+
+
+$("rPeople").textContent =
+people;
+
+
+/* SHOW RECEIPT */
+
+$("receipt").style.display =
+"block";
+
+
+$("print").style.display =
+"inline-block";
+
+
+/* SUCCESS MESSAGE */
+
+result.className =
+"result success";
+
+
+result.style.display =
+"block";
+
+
+result.textContent =
+"✓ Booking confirmed successfully! Confirmation ID: "
++ code;
+
+
+/* SCROLL */
+
+$("printArea").scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+
+/* =====================================================
+   PRINT BUTTON
+===================================================== */
+
+$("print").addEventListener(
+"click",
+()=>{
+
+window.print();
+
+});
+
+
+/* =====================================================
+   TODAY'S DATE
+===================================================== */
+
+const today =
+new Date()
+.toISOString()
+.split("T")[0];
+
+
+$("date").min =
+today;
+
+
+$("date").value =
+today;
+
+
+/* =====================================================
+   DEMO LIVE CROWD
+===================================================== */
+
+setInterval(()=>{
+
+
+$("inside").textContent =
+243 +
+Math.floor(
+Math.random()*12
+);
+
+
+$("wait").textContent =
+(
+7 +
+Math.floor(
+Math.random()*5
+)
+)
+.toString()
+.padStart(2,"0")
++ " min";
+
+
+},4500);
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+render();
+
+</script>
+
+
+</body>
+</html>
